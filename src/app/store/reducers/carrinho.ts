@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { access } from "fs";
 
 interface Item {
   id: number;
-  photo?: string;
-  title?: string;
-  price?: number;
+  quantidade: number;
 }
 
 const initialState: Item[] = [];
@@ -13,19 +12,40 @@ const carrinhoSlice = createSlice({
   name: "carrinho",
   initialState,
   reducers: {
-    mudarCarrinho: (state, action: PayloadAction<number>) => {
-        const temItem = state.some((item) => item.id === action.payload);
-        if (!temItem) {
-          // Adicione um novo item ao carrinho se ele não existir
-          state.push({ id: action.payload });
-        } else {
-          // Remova o item do carrinho se ele já existir
-          return state.filter((item) => item.id !== action.payload);
-        }
-      },
+    addCarrinho: (state, action: PayloadAction<number>) => {
+      const temItem = state.some((item) => item.id === action.payload);
+      if (!temItem) {
+        // Adicione um novo item ao carrinho se ele não existir
+        state.push({ id: action.payload, quantidade: 1 });
+      }
     },
-  }
-);
+    removeCarrinho: (state, action: PayloadAction<number>) => {
+      const itemIdToRemove = action.payload;
+      const index = state.findIndex((item) => item.id === itemIdToRemove);
+      if (index !== -1) {
+        state.splice(index, 1); // Remove o item do carrinho
+      }
+    },
+    incrementarCarrinho: (state, action: PayloadAction<number>) => {
+      const temItem = state.find((item) => item.id === action.payload);
+      if (temItem) {
+        temItem.quantidade += 1;
+      } else {
+        state.push({ id: action.payload, quantidade: 1 });
+      }
+    },
+    decrementarCarrinho: (state, action: PayloadAction<number>) => {
+      const temItem = state.find((item) => item.id === action.payload);
+      const itemIdToRemove = action.payload;
+      const index = state.findIndex((item) => item.id === itemIdToRemove);
+      if(temItem){
+        temItem.quantidade -=1;
+      }
+      if(temItem?.quantidade === 0){
+        state.splice(index, 1);
+      }
+    },
+  }});
 
-export const { mudarCarrinho } = carrinhoSlice.actions;
+export const { addCarrinho, removeCarrinho, incrementarCarrinho, decrementarCarrinho } = carrinhoSlice.actions;
 export default carrinhoSlice.reducer;

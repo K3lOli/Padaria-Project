@@ -30,6 +30,7 @@ type Item = {
   title: string;
   photo: string;
   price: number;
+  quantidade?: number;
 };
 
 type ItemNoCarrinho = {
@@ -105,9 +106,11 @@ export default function Feed() {
       <div className="">
         
       </div>
-      <div className={`cart ${cartOpen ? 'translate-x-0' : 'translate-x-full'} rounded-2xl fixed top-0 right-0 w-[30vw] h-full bg-[#EDDCED] overflow-y-auto transition-transform duration-300 ease-in-out transform flex flex-col items-center`}>
+      <div className={`cart ${cartOpen ? 'translate-x-0' : 'translate-x-full'} rounded-2xl fixed top-0 right-0 w-[30vw] h-full bg-[#EDDCED] overflow-y-auto transition-transform bg-opacity-70 backdrop-blur-sm duration-300 ease-in-out transform flex flex-col items-center`}>
         <h1 className="text-black text-[1.6rem] mt-10">Carrinho de Compras</h1>
-        <button onClick={handleToggleClick} className="close-button mt-4 mx-2 cursor-pointer text-black">[x]</button>
+        <button  onClick={handleToggleClick} className="w-4 h-4 bg-red-600 rounded flex justify-center items-center absolute top-10 right-10">
+          x
+        </button>
         {carrinho.map((item) => (
           <CardCarrinho key={item.id} {...item} carrinho />
         ))}

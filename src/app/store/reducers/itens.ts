@@ -4,6 +4,7 @@ interface Itens {
   photo: string;
   price: number;
   id: number;
+  quantidade?: number;
 }
 
 const initialState: Itens[] = [
