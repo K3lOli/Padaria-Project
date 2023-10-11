@@ -13,7 +13,6 @@ export default function Header() {
     dispatch(toggleState());
   };
   const temItem = useSelector((state: RootState) => state.carrinho);
-  temItem.map((item) => console.log(item.item));
 
   return (
     <div className="w-[60vw] flex justify-between mt-[2.6vw] mb-[1vw]">
@@ -23,7 +22,7 @@ export default function Header() {
       <div className="flex text-[24px] text-[#545454] gap-[3.125rem] items-center">
         {/* <AiFillHome /> */}
         <div className="h-[24px] relative">
-          {temItem.map((item) => (item.item)? <div className="bg-red-600 w-3 h-3 rounded-full absolute right-0"></div>: null 
+          {temItem.map((item) => (item.item)? <div key={item.id} className="bg-red-600 w-3 h-3 rounded-full absolute right-0"></div>: null 
           )}
           
           <button>
