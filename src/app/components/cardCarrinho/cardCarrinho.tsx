@@ -58,8 +58,8 @@ export default function CardCarrinho(props: CardProps) {
           >
             <AiOutlinePlus size={20} className="text-[#171515]" />
           </button>
-          {cart.map((item) => (
-            <div>{item.quantidade}</div>
+          {cart.map((item, index) => (
+            <div key={index}>{item.quantidade}</div>
           ))}
           <button
             className="bg-white w-[3vw] h-8 rounded-full flex justify-center items-center"
