@@ -47,13 +47,13 @@ export default function CardCarrinho(props: CardProps) {
             className="w-[83px] h-[79px] rounded-lg object-cover"
           />
           <div className="flex flex-col ml-3">
-            <h1 className="text-[1vw] text-white mb-2 mt-1">{title}</h1>
-            <h2 className="text-[1.2vw] text-white">R${price}</h2>
+            <h1 className="text-[20px] text-white mb-2 mt-1">{title}</h1>
+            <h2 className="text-[24px] text-white">R${price}</h2>
           </div>
         </div>
-        <div className="w-auto h-[5.3vw] bg-[#453C47] rounded-full flex flex-col justify-between items-center mr-4">
+        <div className="w-auto h-[70px] bg-[#453C47] rounded-full flex flex-col justify-between items-center mr-4">
           <button
-            className="bg-white w-[3vw] h-8 rounded-full flex justify-center items-center"
+            className="bg-white w-[40px] h-8 rounded-full flex justify-center items-center"
             onClick={() => incrementaCarrinho(id)}
           >
             <AiOutlinePlus size={20} className="text-[#171515]" />
@@ -62,7 +62,7 @@ export default function CardCarrinho(props: CardProps) {
             <div key={index}>{item.quantidade}</div>
           ))}
           <button
-            className="bg-white w-[3vw] h-8 rounded-full flex justify-center items-center"
+            className="bg-white w-[40px] h-8 rounded-full flex justify-center items-center"
             onClick={() => decrementaCarrinho(id)}
           >
             <AiOutlineMinus size={20} className="text-[#171515]" />
