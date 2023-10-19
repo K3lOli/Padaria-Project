@@ -55,7 +55,8 @@ export default function Feed() {
   const quantidade = useSelector((state: RootState) =>
     state.carrinho.map((item) => item.quantidade)
   );
-  const carrinho = useSelector((state: RootState) => {
+  const carrinho = useSelector((state: RootState) => state.carrinho);
+  const carrinho1 = useSelector((state: RootState) => {
     const carrinhoReduce: Item[] = state.carrinho.reduce(
       (itens: Item[], itemNoCarrinho: ItemNoCarrinho) => {
         const item = state.itens.find((item) => item.id === itemNoCarrinho.id);

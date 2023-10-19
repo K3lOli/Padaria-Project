@@ -15,17 +15,18 @@ interface CardProps {
   photo: string;
   id: number;
   carrinho?: boolean;
+  quantidade?: number;
 }
 
 export default function CardCarrinho(props: CardProps) {
-  const { title, price, photo, id, carrinho } = props;
+  const { title, price, photo, id, carrinho, quantidade } = props;
   const cart = useSelector((state: RootState) =>
     state.carrinho.filter((item) => item.id === props.id)
   );
   const dispatch = useDispatch();
 
   function resolverCarrinho() {
-    dispatch(addCarrinho(id));
+    dispatch(addCarrinho({ ...props, item: true, quantidade: quantidade || 1 }));
   }
   function incrementaCarrinho(id: number) {
     dispatch(incrementarCarrinho(id));

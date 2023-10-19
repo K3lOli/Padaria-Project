@@ -5,6 +5,8 @@ import { BsFillCartFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "../../../../public/assets/padaria.png";
 import Image from "next/image";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import auth from '../../services/firebase'
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -13,6 +15,12 @@ export default function Header() {
     dispatch(toggleState());
   };
   const temItem = useSelector((state: RootState) => state.carrinho);
+
+  const authenticator = () => {
+    console.log('entrou');
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then((result) => {console.log(result)}).catch((error) => {console.log('deu errado', error)})
+  }
 
   return (
     <div className="w-[60vw] flex justify-between mt-[2.6vw] mb-[1vw]">
@@ -29,7 +37,9 @@ export default function Header() {
             <BsFillCartFill onClick={handleToggleClick} />
           </button>
         </div>
-        <AiOutlineUser />
+        <button>
+        <AiOutlineUser onClick={authenticator}/>
+        </button>
       </div>
     </div>
   );

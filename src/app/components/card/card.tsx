@@ -7,16 +7,17 @@ import { addCarrinho } from "@/app/store/reducers/carrinho";
 type Props = (typeof cardapio)[0];
 
 interface CardProps extends Props {
-  carrinho?: boolean;
+  quantidade?: number;
+  // carrinho?: boolean;
 }
 
 export default function Card(props: CardProps) {
-  const { title, price, photo, id, carrinho } = props;
+  const { title, price, photo, id, quantidade } = props;
   const dispatch = useDispatch();
   const estaNoCarrinho = useSelector((state : RootState) => state.carrinho.some((item) => item.id === props.id))
 
   function resolverCarrinho() {
-    dispatch(addCarrinho(id));
+    dispatch(addCarrinho({ ...props, item: true, quantidade: quantidade || 1 }));
   }
   
   return (
